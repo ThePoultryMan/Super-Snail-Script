@@ -10,3 +10,11 @@ repositories {
 }
 
 dependencies {}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'io.github.thepoultryman.snailscript.SuperSnailScript'
+        )
+    }
+}
