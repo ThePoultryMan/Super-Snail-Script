@@ -1,7 +1,9 @@
 package io.github.thepoultryman.snailscript;
 
+import java.io.File;
+
 public class SuperSnailScript {
     public static void main(String[] args) {
-        System.out.println("hello");
+        File file = new File(args[0]);
     }
 }
