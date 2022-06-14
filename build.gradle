@@ -14,6 +14,7 @@ dependencies {
     implementation "ch.qos.logback:logback-core:${project.logback_version}"
     implementation "ch.qos.logback:logback-classic:${project.logback_version}"
     implementation "org.slf4j:slf4j-api:${project.slf4j_version}"
+    implementation 'commons-io:commons-io:2.11.0'
 }
 
 jar {
