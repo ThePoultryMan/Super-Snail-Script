@@ -20,11 +20,15 @@
         </encoder>
     </appender>
 
-    <appender name="USER_LOG" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_DIR}/script-output.log</file>
-        <append>true</append>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level : %msg%n</pattern>
+    <appender name="USER_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_DIR}/latest-script-output.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd-hh-mm-ss}-script-output.%i.log.gz</FileNamePattern>
+            <MaxHistory>15</MaxHistory>
+            <maxFileSize>15MB</maxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{HH:mm:ss.SSS} %-5level : %msg%n</Pattern>
         </encoder>
     </appender>
 
