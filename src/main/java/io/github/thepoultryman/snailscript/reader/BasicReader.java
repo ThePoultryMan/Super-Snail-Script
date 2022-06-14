@@ -38,8 +38,20 @@ public class BasicReader {
                 }
             } else if (line.startsWith("print(")) { // Check if the line specifies a print function;
                 // Will check all maps to properly print variable.
-                SuperSnailScript.LOGGER.info(Integers.get(line.substring(line.indexOf("(") + 1, line.indexOf(")"))).toString()); // Will write to custom log later.
+                String printString = this.printVariable(line.substring(line.indexOf("(") + 1, line.indexOf(")")));
+                if (printString != null) {
+                    SuperSnailScript.LOGGER.info(printString); // Will write to custom log later.
+                }
             }
+        }
+    }
+
+    private String printVariable(String variableName) {
+        if (Integers.containsKey(variableName)) {
+            return Integers.get(variableName).toString();
+        } else {
+            SuperSnailScript.LOGGER.error("'" + variableName + "' does not exist as a variable, of any type.");
+            return null;
         }
     }
 }
