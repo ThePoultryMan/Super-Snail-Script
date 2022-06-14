@@ -41,6 +41,8 @@ public class BasicReader {
                 String printString = this.printVariable(line.substring(line.indexOf("(") + 1, line.indexOf(")")));
                 if (printString != null) {
                     SuperSnailScript.LOGGER.info(printString); // Will write to custom log later.
+                } else {
+                    return; // Stop the script from running
                 }
             }
         }
