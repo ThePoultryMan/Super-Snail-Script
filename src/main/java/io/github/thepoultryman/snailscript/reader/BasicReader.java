@@ -6,10 +6,15 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BasicReader {
     private List<String> lines = null;
+
+    // Variable Maps
+    private final Map<String, Integer> Integers = new HashMap<>();
 
     public BasicReader(File file) {
         try {
@@ -23,7 +28,18 @@ public class BasicReader {
 
     private void runScript() {
         for (String line : lines) {
-            SuperSnailScript.LOGGER.info(line);
+            if (line.startsWith("integer")) { // Check if line specifies an integer variable.
+                Integer parsedInteger = ReaderUtil.tryIntegerParse(line.substring(line.indexOf("=") + 2, line.indexOf(";")));
+                if (parsedInteger != null) {
+                    Integers.put(line.substring(8, line.indexOf("=") - 1), parsedInteger);
+                } else {
+                    SuperSnailScript.LOGGER.error("Stopping your script");
+                    return;
+                }
+            } else if (line.startsWith("print(")) { // Check if the line specifies a print function;
+                // Will check all maps to properly print variable.
+                SuperSnailScript.LOGGER.info(Integers.get(line.substring(line.indexOf("(") + 1, line.indexOf(")"))).toString()); // Will write to custom log later.
+            }
         }
     }
 }
