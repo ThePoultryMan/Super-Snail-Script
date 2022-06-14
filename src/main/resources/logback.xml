@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <property name="LOGDIR" value="./logs" />
+    <property name="LOG_DIR" value="./logs" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -8,8 +8,8 @@
         </encoder>
     </appender>
 
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOGDIR}/latest-debug.log</File>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_DIR}/latest-debug.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOGDIR}/%d{yyyy-MM-dd-hh-mm-ss}.%i.log.gz</FileNamePattern>
             <MaxHistory>30</MaxHistory>
@@ -23,6 +23,6 @@
 
     <root level="info">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="file" />
+        <appender-ref ref="FILE" />
     </root>
 </configuration>
