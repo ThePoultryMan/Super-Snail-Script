@@ -40,7 +40,7 @@ public class BasicReader {
                 // Will check all maps to properly print variable.
                 String printString = this.printVariable(line.substring(line.indexOf("(") + 1, line.indexOf(")")));
                 if (printString != null) {
-                    SuperSnailScript.LOGGER.info(printString); // Writes to "user.log"
+                    ReaderUtil.USER_LOGGER.info(printString); // Writes to "latest-script-output.log"
                 } else {
                     return; // Stop the script from running
                 }
