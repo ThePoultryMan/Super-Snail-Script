@@ -15,7 +15,7 @@ public class SuperSnailScript {
             if (!file.exists()) {
                 LOGGER.error("The specified file does not exist! Please check to make sure that the path that you entered is correct.");
             } else {
-                if (isAdvanced(file)) {
+                if (!isAdvanced(file)) {
                     BasicReader scriptReader = new BasicReader(file);
                 }
             }
