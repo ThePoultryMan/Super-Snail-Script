@@ -11,7 +11,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_DIR}/latest-debug.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <FileNamePattern>${LOGDIR}/%d{yyyy-MM-dd-hh-mm-ss}.%i.log.gz</FileNamePattern>
+            <FileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd-hh-mm-ss}.%i.log.gz</FileNamePattern>
             <MaxHistory>30</MaxHistory>
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
