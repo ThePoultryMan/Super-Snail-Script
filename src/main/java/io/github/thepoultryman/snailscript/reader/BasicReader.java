@@ -40,7 +40,7 @@ public class BasicReader {
                 // Will check all maps to properly print variable.
                 String printString = this.printVariable(line.substring(line.indexOf("(") + 1, line.indexOf(")")));
                 if (printString != null) {
-                    SuperSnailScript.LOGGER.info(printString); // Will write to custom log later.
+                    SuperSnailScript.LOGGER.info(printString); // Writes to "user.log"
                 } else {
                     return; // Stop the script from running
                 }
@@ -52,7 +52,7 @@ public class BasicReader {
         if (Integers.containsKey(variableName)) {
             return Integers.get(variableName).toString();
         } else {
-            SuperSnailScript.LOGGER.error("'" + variableName + "' does not exist as a variable, of any type.");
+            ReaderUtil.USER_LOGGER.error("'" + variableName + "' does not exist as a variable, of any type.");
             return null;
         }
     }
