@@ -42,6 +42,7 @@ public class BasicReader {
                 if (printString != null) {
                     ReaderUtil.USER_LOGGER.info(printString); // Writes to "latest-script-output.log"
                 } else {
+                    SuperSnailScript.LOGGER.debug("The script is being stopped because printing a variable failed.");
                     return; // Stop the script from running
                 }
             }
