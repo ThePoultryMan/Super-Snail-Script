@@ -17,6 +17,7 @@ public class BasicReader {
 
     // Variable Maps
     private final Map<String, Integer> Integers = new HashMap<>();
+    private final Map<String, Float> Floats = new HashMap<>();
 
     public BasicReader(File file) {
         try {
@@ -33,11 +34,18 @@ public class BasicReader {
             int variableType = VariableUtil.checkForVariable(line);
             if (variableType != 0) {
                 // 0 means no variable 1 is Integer, 2 is float
+                String variableString = line.substring(line.indexOf("=") + 2, line.indexOf(";"));
                 switch (variableType) {
                     case 1 -> {
-                        Integer integerVariable = VariableUtil.tryIntegerParse(line.substring(line.indexOf("=") + 2, line.indexOf(";")));
+                        Integer integerVariable = VariableUtil.tryIntegerParse(variableString);
                         if (integerVariable != null)
-                            Integers.put(line.substring(8, line.indexOf("=") - 1), integerVariable);
+                            this.Integers.put(line.substring(8, line.indexOf("=") - 1), integerVariable);
+                        else return;
+                    }
+                    case 2 -> {
+                        Float floatVariable = VariableUtil.tryFloatParse(variableString);
+                        if (floatVariable != null)
+                            this.Floats.put(line.substring(6, line.indexOf("=") - 1), floatVariable);
                         else return;
                     }
                 }
@@ -55,8 +63,10 @@ public class BasicReader {
     }
 
     private String printVariable(String variableName) {
-        if (Integers.containsKey(variableName)) {
+        if (this.Integers.containsKey(variableName)) {
             return Integers.get(variableName).toString();
+        } else if (this.Floats.containsKey(variableName)) {
+            return this.Floats.get(variableName).toString();
         } else {
             ReaderUtil.USER_LOGGER.error("'" + variableName + "' does not exist as a variable, of any type.");
             return null;

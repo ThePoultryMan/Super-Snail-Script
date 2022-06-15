@@ -22,5 +22,12 @@ public class VariableUtil {
         }
     }
 
-
+    public static Float tryFloatParse(String stringFloat) {
+        try {
+            return Float.valueOf(stringFloat);
+        } catch (NumberFormatException e) {
+            SuperSnailScript.LOGGER.error("The specified float couldn't be parsed. Your script is broken and will not continue to run.");
+            return null;
+        }
+    }
 }
