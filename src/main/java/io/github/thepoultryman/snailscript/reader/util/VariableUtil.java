@@ -1,11 +1,17 @@
-package io.github.thepoultryman.snailscript.reader;
+package io.github.thepoultryman.snailscript.reader.util;
 
 import io.github.thepoultryman.snailscript.SuperSnailScript;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class ReaderUtil {
-    public static final Logger USER_LOGGER = LoggerFactory.getLogger("script-output");
+public class VariableUtil {
+    public static int checkForVariable(String line) {
+        if (line.startsWith("integer")) {
+            return 1;
+        } else if (line.startsWith("float")) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
 
     public static Integer tryIntegerParse(String stringInteger) {
         try {
@@ -15,4 +21,6 @@ public class ReaderUtil {
             return null;
         }
     }
+
+
 }

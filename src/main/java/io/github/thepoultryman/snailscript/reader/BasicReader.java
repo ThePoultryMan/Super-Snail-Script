@@ -1,6 +1,8 @@
 package io.github.thepoultryman.snailscript.reader;
 
 import io.github.thepoultryman.snailscript.SuperSnailScript;
+import io.github.thepoultryman.snailscript.reader.util.ReaderUtil;
+import io.github.thepoultryman.snailscript.reader.util.VariableUtil;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -28,13 +30,16 @@ public class BasicReader {
 
     private void runScript() {
         for (String line : lines) {
-            if (line.startsWith("integer")) { // Check if line specifies an integer variable.
-                Integer parsedInteger = ReaderUtil.tryIntegerParse(line.substring(line.indexOf("=") + 2, line.indexOf(";")));
-                if (parsedInteger != null) {
-                    Integers.put(line.substring(8, line.indexOf("=") - 1), parsedInteger);
-                } else {
-                    SuperSnailScript.LOGGER.error("Stopping your script");
-                    return;
+            int variableType = VariableUtil.checkForVariable(line);
+            if (variableType != 0) {
+                // 0 means no variable 1 is Integer, 2 is float
+                switch (variableType) {
+                    case 1 -> {
+                        Integer integer = VariableUtil.tryIntegerParse(line.substring(line.indexOf("=") + 2, line.indexOf(";")));
+                        if (integer != null)
+                            Integers.put(line.substring(8, line.indexOf("=") - 1), integer);
+                        else return;
+                    }
                 }
             } else if (line.startsWith("print(")) { // Check if the line specifies a print function;
                 // Will check all maps to properly print variable.
