@@ -35,9 +35,9 @@ public class BasicReader {
                 // 0 means no variable 1 is Integer, 2 is float
                 switch (variableType) {
                     case 1 -> {
-                        Integer integer = VariableUtil.tryIntegerParse(line.substring(line.indexOf("=") + 2, line.indexOf(";")));
-                        if (integer != null)
-                            Integers.put(line.substring(8, line.indexOf("=") - 1), integer);
+                        Integer integerVariable = VariableUtil.tryIntegerParse(line.substring(line.indexOf("=") + 2, line.indexOf(";")));
+                        if (integerVariable != null)
+                            Integers.put(line.substring(8, line.indexOf("=") - 1), integerVariable);
                         else return;
                     }
                 }
